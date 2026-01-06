@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5197129553395946122}
   - component: {fileID: 1146265470574893437}
+  - component: {fileID: 2921207960241779914}
   m_Layer: 0
   m_Name: Mirror_ujin
   m_TagString: Untagged
@@ -165,3 +166,15 @@ MonoBehaviour:
   rotateYawRightKey: 101
   rotatePitchUpKey: 114
   rotatePitchDownKey: 102
+--- !u!114 &2921207960241779914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335509556109147236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa24b9dcc67a1649b6b6a4f61c12bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MirrorSurface
