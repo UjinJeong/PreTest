@@ -21,7 +21,7 @@ public class MirrorTransformController : MonoBehaviour
      * Rotate (회전)
      * =============================== */
     [Header("오브젝트 회전")]
-    public float rotateSpeed = 120f;           // 회전 속도 (deg/sec)
+    public float rotateSpeed = 10;           // 회전 속도 (deg/sec)
 
     public KeyCode rotateYawLeftKey = KeyCode.Q;    // 좌/우 회전 (Y-)
     public KeyCode rotateYawRightKey = KeyCode.E;   // 좌/우 회전 (Y+)

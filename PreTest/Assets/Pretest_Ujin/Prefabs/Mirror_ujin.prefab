@@ -161,7 +161,7 @@ MonoBehaviour:
   verticalMoveSpeed: 1.5
   moveUpKey: 119
   moveDownKey: 115
-  rotateSpeed: 120
+  rotateSpeed: 10
   rotateYawLeftKey: 113
   rotateYawRightKey: 101
   rotatePitchUpKey: 114
