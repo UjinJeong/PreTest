@@ -36,7 +36,7 @@ public class ReceiverStateEffect : MonoBehaviour
     private Renderer cachedRenderer;            // 색상 변경용 Renderer
     private Color originalColor;                // 원래 색상
 
-    private void Awake()
+    private void Start()
     {
         // 초기 스케일 저장
         originalScale = transform.localScale;

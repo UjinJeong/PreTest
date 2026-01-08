@@ -13,21 +13,13 @@ public class EffectSoundController : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private void Awake()
+    private void Start()
     {
-        // ΩÃ±€≈Ê √≥∏Æ
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     /// <summary>
@@ -35,19 +27,7 @@ public class EffectSoundController : MonoBehaviour
     /// </summary>
     public static void Play(int index)
     {
-        if (Instance == null)
-        {
-            Debug.Log("EffectSoundController is not initialized.");
-            return;
-        }
-
-        if (index < 0 || index >= Instance.audioClips.Length)
-        {
-            Debug.Log($"Invalid sound index : {index}");
-            return;
-        }
-
-        Instance.audioSource.PlayOneShot(Instance.audioClips[index]);
+        Instance?.audioSource.PlayOneShot(Instance.audioClips[index]);
     }
 }
 
