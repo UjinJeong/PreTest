@@ -49,15 +49,18 @@ public class InstanceExample : MonoBehaviour
 	{
 		ParticleSystem newParticleSystem = Instantiate(prefab,position,Quaternion.identity) as ParticleSystem;
 
-		/// -----------------------------
-		// Make sure it will be destroyed
-		/// -----------------------------
-		Destroy(
-			newParticleSystem.gameObject,
-			newParticleSystem.startLifetime
-		);
+        /// -----------------------------
+        // Make sure it will be destroyed
+        /// -----------------------------
+        var main = newParticleSystem.main;
 
-		return newParticleSystem;
+        // startLifetime은 MinMaxCurve라서 constant로 가져옴
+        float lifetime = main.startLifetime.constant;
+
+        Destroy(newParticleSystem.gameObject, lifetime);
+
+
+        return newParticleSystem;
 	}
 
 
