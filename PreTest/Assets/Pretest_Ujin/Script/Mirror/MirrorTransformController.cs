@@ -1,25 +1,22 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 플레이 타임 중 거울 오브젝트의 이동 및 회전을 제어하는 컨트롤러
+/// </summary>
 public class MirrorTransformController : MonoBehaviour
 {
-    /* ===============================
-     * Drag Move (마우스 드래그 이동)
-     * =============================== */
+     // Drag Move (마우스 드래그 이동)
     private float dragPlaneY;                 // 드래그 시 기준이 되는 현재 거울 높이(Y)
     [Tooltip("바닥에 파묻히는 현상 방지용 오프셋")]
     public float surfaceOffset = 0.01f;       // 바닥에 파묻히는 현상 방지용 오프셋
 
-    /* ===============================
-     * Vertical Move (위/아래 이동)
-     * =============================== */
+    // Vertical Move(위/아래 이동)
     [Header("오브젝트 위/아래 이동")]
     public float verticalMoveSpeed = 1.5f;    // W/S 키로 위/아래 이동 속도
     public KeyCode moveUpKey = KeyCode.W;      // 위로 이동
     public KeyCode moveDownKey = KeyCode.S;    // 아래로 이동
 
-    /* ===============================
-     * Rotate (회전)
-     * =============================== */
+    // Rotate (회전)
     [Header("오브젝트 회전")]
     public float rotateSpeed = 10;           // 회전 속도 (deg/sec)
 
@@ -29,31 +26,10 @@ public class MirrorTransformController : MonoBehaviour
     public KeyCode rotatePitchUpKey = KeyCode.R;    // 위/아래 기울기 (X+)
     public KeyCode rotatePitchDownKey = KeyCode.F;  // 위/아래 기울기 (X-)
 
-    /* ===============================
-     * State
-     * =============================== */
+    // State(상태)
     private bool isSelected;                   // 현재 선택된 거울인지 여부
     private bool isDragging;                   // 드래그 중인지 여부
     private Vector3 dragOffset;                // 클릭 지점과 오브젝트 중심 간 보정값
-
-    /* ===============================
-     * Visual (선택 표시)
-     * =============================== */
-    private Renderer[] rends;                  // 거울 렌더러들
-    private Color[] originalColors;            // 선택 해제 시 복구할 원래 색상
-
-    private void Awake()
-    {
-        // 선택 시 색상 변경을 위한 초기 색상 저장
-        rends = GetComponentsInChildren<Renderer>();
-        originalColors = new Color[rends.Length];
-
-        for (int i = 0; i < rends.Length; i++)
-        {
-            if (rends[i].material.HasProperty("_Color"))
-                originalColors[i] = rends[i].material.color;
-        }
-    }
 
     /// <summary>
     /// 거울 선택/해제 처리
@@ -62,14 +38,6 @@ public class MirrorTransformController : MonoBehaviour
     {
         isSelected = selected;
         isDragging = false;
-
-        // 선택된 경우 색상 변경으로 시각적 피드백 제공
-        for (int i = 0; i < rends.Length; i++)
-        {
-            if (rends[i] == null) continue;
-            if (rends[i].material.HasProperty("_Color"))
-                rends[i].material.color = selected ? Color.yellow : originalColors[i];
-        }
     }
 
     private void Update()
@@ -97,13 +65,13 @@ public class MirrorTransformController : MonoBehaviour
         if (Input.GetKey(rotatePitchUpKey)) pitch += 1f;
         if (Input.GetKey(rotatePitchDownKey)) pitch -= 1f;
 
-        // 좌우 회전 (월드 기준)
+        // 좌우 회전(Yaw) : 월드 기준으로 항상 지면 기준 회전
         if (Mathf.Abs(yaw) > 0.01f)
         {
             transform.Rotate(Vector3.up, yaw * rotateSpeed * Time.deltaTime, Space.World);
         }
 
-        // 위/아래 기울기 (로컬 기준)
+        // 위/아래 기울기(Pitch) : 로컬 기준으로 거울 면 기준 회전
         if (Mathf.Abs(pitch) > 0.01f)
         {
             transform.Rotate(Vector3.right, pitch * rotateSpeed * Time.deltaTime, Space.Self);
@@ -166,24 +134,31 @@ public class MirrorTransformController : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// 마우스 위치를 기준으로 현재 드래그 평면과의 교차 지점 계산
+    /// 마우스 위치에서 쏜 레이가 현재 거울 높이의 평면과 만나는 지점을 계산
     /// </summary>
     private bool TryRaycastToPlane(out Vector3 hitPoint)
     {
         hitPoint = default;
 
+        // 메인 카메라 가져오기
         Camera cam = Camera.main;
         if (cam == null) return false;
 
+        // 마우스 위치에서 화면 → 월드로 레이 생성
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        // 현재 거울 높이를 기준으로 한 수평 평면
+        // 현재 거울 높이(dragPlaneY)에 있는 수평 평면 생성
         Plane plane = new Plane(Vector3.up, new Vector3(0f, dragPlaneY, 0f));
+
+        // 레이가 평면과 교차하는지 검사
         if (plane.Raycast(ray, out float enter))
         {
+            // 교차 지점의 월드 좌표 계산
             hitPoint = ray.GetPoint(enter);
             return true;
         }
+
         return false;
     }
+
 }
