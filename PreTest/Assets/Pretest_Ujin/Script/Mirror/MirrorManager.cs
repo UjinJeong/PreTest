@@ -1,38 +1,38 @@
 using UnityEngine;
 
 /// <summary>
-/// ÇÃ·¹ÀÌ Å¸ÀÓ Áß °Å¿ï ¿ÀºêÁ§Æ®ÀÇ »ı¼º, ¼±ÅÃ, »èÁ¦¸¦ °ü¸®ÇÏ´Â ¸Å´ÏÀú
-/// - ´ÜÃàÅ°·Î °Å¿ï »ı¼º
-/// - ¸¶¿ì½º Å¬¸¯À¸·Î °Å¿ï ¼±ÅÃ
-/// - ¼±ÅÃµÈ °Å¿ïÀº Á¶ÀÛ °¡´É »óÅÂ·Î ÀüÈ¯
+/// í”Œë ˆì´ íƒ€ì„ ì¤‘ ê±°ìš¸ ì˜¤ë¸Œì íŠ¸ì˜ ìƒì„±, ì„ íƒ, ì‚­ì œë¥¼ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €
+/// - ë‹¨ì¶•í‚¤ë¡œ ê±°ìš¸ ìƒì„±
+/// - ë§ˆìš°ìŠ¤ í´ë¦­ìœ¼ë¡œ ê±°ìš¸ ì„ íƒ
+/// - ì„ íƒëœ ê±°ìš¸ì€ ì¡°ì‘ ê°€ëŠ¥ ìƒíƒœë¡œ ì „í™˜
 /// </summary>
 public class MirrorManager : MonoBehaviour
 {
-    [Header("°Å¿ï ÇÁ¸®ÆÕ")]
-    public GameObject mirrorPrefab;         // »ı¼ºÇÒ °Å¿ï ÇÁ¸®ÆÕ
+    [Header("ê±°ìš¸ í”„ë¦¬íŒ¹")]
+    public GameObject mirrorPrefab;         // ìƒì„±í•  ê±°ìš¸ í”„ë¦¬íŒ¹
 
-    [Header("°Å¿ï »ı¼º À§Ä¡")]
+    [Header("ê±°ìš¸ ìƒì„± ìœ„ì¹˜")]
     [SerializeField]
-    private Vector3 MirrorVector = Vector3.zero;            // °Å¿ï »ı¼º À§Ä¡ (±âº»°ª: (0,0,0))
+    private Vector3 MirrorVector = Vector3.zero;            // ê±°ìš¸ ìƒì„± ìœ„ì¹˜ (ê¸°ë³¸ê°’: (0,0,0))
 
-    // ÇöÀç ¼±ÅÃµÈ °Å¿ï ÄÁÆ®·Ñ·¯
+    // í˜„ì¬ ì„ íƒëœ ê±°ìš¸ ì»¨íŠ¸ë¡¤ëŸ¬
     private MirrorTransformController currentSelected;
 
     void Update()
     {
-        // Z Å°¸¦ ´©¸£¸é »õ·Î¿î °Å¿ï »ı¼º
+        // Z í‚¤ë¥¼ ëˆ„ë¥´ë©´ ìƒˆë¡œìš´ ê±°ìš¸ ìƒì„±
         if (Input.GetKeyDown(KeyCode.Z))
         {
             GameObject obj = Instantiate(mirrorPrefab, MirrorVector, Quaternion.identity);
 
-            // »ı¼ºµÈ °Å¿ïÀÇ ÄÁÆ®·Ñ·¯ °¡Á®¿À±â
+            // ìƒì„±ëœ ê±°ìš¸ì˜ ì»¨íŠ¸ë¡¤ëŸ¬ ê°€ì ¸ì˜¤ê¸°
             MirrorTransformController mi = obj.GetComponent<MirrorTransformController>();
 
-            // »ı¼º Á÷ÈÄ ÇØ´ç °Å¿ïÀ» ¼±ÅÃ »óÅÂ·Î ¼³Á¤
+            // ìƒì„± ì§í›„ í•´ë‹¹ ê±°ìš¸ì„ ì„ íƒ ìƒíƒœë¡œ ì„¤ì •
             Select(mi);
         }
 
-        // ¸¶¿ì½º Å¬¸¯ ½Ã °Å¿ï ¼±ÅÃ Ã³¸®
+        // ë§ˆìš°ìŠ¤ í´ë¦­ ì‹œ ê±°ìš¸ ì„ íƒ ì²˜ë¦¬
         if (Input.GetMouseButtonDown(0))
         {
             if (TryPickMirror(out var picked))
@@ -41,7 +41,7 @@ public class MirrorManager : MonoBehaviour
             }
         }
 
-        // Delete Å°·Î ÇöÀç ¼±ÅÃµÈ °Å¿ï »èÁ¦
+        // Delete í‚¤ë¡œ í˜„ì¬ ì„ íƒëœ ê±°ìš¸ ì‚­ì œ
         if (Input.GetKeyDown(KeyCode.Delete) && currentSelected != null)
         {
             Destroy(currentSelected.gameObject);
@@ -50,20 +50,20 @@ public class MirrorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼±ÅÃµÈ °Å¿ïÀ» º¯°æÇÏ´Â ÇÔ¼ö
-    /// - ±âÁ¸ ¼±ÅÃ ÇØÁ¦
-    /// - »õ °Å¿ï ¼±ÅÃ
+    /// ì„ íƒëœ ê±°ìš¸ì„ ë³€ê²½í•˜ëŠ” í•¨ìˆ˜
+    /// - ê¸°ì¡´ ì„ íƒ í•´ì œ
+    /// - ìƒˆ ê±°ìš¸ ì„ íƒ
     /// </summary>
     private void Select(MirrorTransformController mi)
     {
-        // ÀÌ¹Ì ¼±ÅÃµÈ ´ë»óÀÌ¸é Ã³¸®ÇÏÁö ¾ÊÀ½
+        // ì´ë¯¸ ì„ íƒëœ ëŒ€ìƒì´ë©´ ì²˜ë¦¬í•˜ì§€ ì•ŠìŒ
         if (currentSelected == mi) return;
 
-        // ÀÌÀü °Å¿ï ¼±ÅÃ ÇØÁ¦
+        // ì´ì „ ê±°ìš¸ ì„ íƒ í•´ì œ
         if (currentSelected != null)
             currentSelected.SetSelected(false);
 
-        // »õ °Å¿ï ¼±ÅÃ
+        // ìƒˆ ê±°ìš¸ ì„ íƒ
         currentSelected = mi;
 
         if (currentSelected != null)
@@ -71,9 +71,9 @@ public class MirrorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸¶¿ì½º·Î Å¬¸¯ÇÑ ¿ÀºêÁ§Æ®°¡ °Å¿ïÀÎÁö ÆÇº°
-    /// - Raycast·Î Å¬¸¯ ´ë»ó °Ë»ç
-    /// - ÀÚ½Ä Äİ¶óÀÌ´õ¸¦ °í·ÁÇØ ºÎ¸ğ¿¡¼­ ÄÁÆ®·Ñ·¯ °Ë»ö
+    /// ë§ˆìš°ìŠ¤ë¡œ í´ë¦­í•œ ì˜¤ë¸Œì íŠ¸ê°€ ê±°ìš¸ì¸ì§€ íŒë³„
+    /// - Raycastë¡œ í´ë¦­ ëŒ€ìƒ ê²€ì‚¬
+    /// - ìì‹ ì½œë¼ì´ë”ë¥¼ ê³ ë ¤í•´ ë¶€ëª¨ì—ì„œ ì»¨íŠ¸ë¡¤ëŸ¬ ê²€ìƒ‰
     /// </summary>
     private bool TryPickMirror(out MirrorTransformController mi)
     {
@@ -82,13 +82,13 @@ public class MirrorManager : MonoBehaviour
         Camera cam = Camera.main;
         if (cam == null) return false;
 
-        // ¸¶¿ì½º Å¬¸¯ À§Ä¡ ±âÁØÀ¸·Î Ray »ı¼º
+        // ë§ˆìš°ìŠ¤ í´ë¦­ ìœ„ì¹˜ ê¸°ì¤€ìœ¼ë¡œ Ray ìƒì„±
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        // Raycast·Î Å¬¸¯ÇÑ ¿ÀºêÁ§Æ® ÆÇº°
+        // Raycastë¡œ í´ë¦­í•œ ì˜¤ë¸Œì íŠ¸ íŒë³„
         if (Physics.Raycast(ray, out RaycastHit hit, 500f))
         {
-            // Äİ¶óÀÌ´õ°¡ ÀÚ½Ä¿¡ ÀÖ¾îµµ °Å¿ï ÄÁÆ®·Ñ·¯¸¦ Ã£À» ¼ö ÀÖµµ·Ï ºÎ¸ğ±îÁö °Ë»ö
+            // ì½œë¼ì´ë”ê°€ ìì‹ì— ìˆì–´ë„ ê±°ìš¸ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì°¾ì„ ìˆ˜ ìˆë„ë¡ ë¶€ëª¨ê¹Œì§€ ê²€ìƒ‰
             mi = hit.collider.GetComponentInParent<MirrorTransformController>();
             return mi != null;
         }
