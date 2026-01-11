@@ -27,7 +27,6 @@ public class EffectSoundController : MonoBehaviour
 
         Instance = this;
 
-        // AudioSource가 없으면 자동으로 추가
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
     }

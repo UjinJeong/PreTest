@@ -23,6 +23,7 @@ public class ReceiverStateEffect : MonoBehaviour
     public Color hitColor = Color.red;          // 레이저에 맞았을 때 변경될 색상
 
 
+    #region 내부 상태 값
     // 원래 스케일 값
     private Vector3 originalScale;
 
@@ -37,6 +38,7 @@ public class ReceiverStateEffect : MonoBehaviour
 
     // 원래 색상 값
     private Color originalColor;
+    #endregion
 
     private void Start()
     {
@@ -54,8 +56,23 @@ public class ReceiverStateEffect : MonoBehaviour
 
     private void Update()
     {
-        // 현재 스케일을 목표 스케일로 부드럽게 보간
-        // 풍선처럼 커졌다 작아지는 느낌 연출
+        UpdateScaleEffect();
+    }
+    private void LateUpdate()
+    {
+        // 이번 프레임에 한 번도 맞지 않았다면 상태 해제
+        if (!isHit)
+            OnLaserNotHit();
+
+        // 다음 프레임을 위해 히트 상태 초기화
+        isHit = false;
+    }
+
+    #region 스케일 이펙트
+    // 현재 스케일을 목표 스케일로 부드럽게 보간
+    // 풍선처럼 커졌다 작아지는 느낌 연출
+    private void UpdateScaleEffect()
+    {
         transform.localScale = Vector3.SmoothDamp(
             transform.localScale,
             targetScale,
@@ -63,7 +80,9 @@ public class ReceiverStateEffect : MonoBehaviour
             scaleSmoothTime
         );
     }
+    #endregion
 
+    #region 레이저 히트 처리
     /// <summary>
     /// 레이저가 Receiver에 맞았을 때 호출
     /// LaserController.cs 에서 매 프레임 호출
@@ -86,17 +105,6 @@ public class ReceiverStateEffect : MonoBehaviour
         // 히트 상태 기록
         isHit = true;
     }
-
-    private void LateUpdate()
-    {
-        // 이번 프레임에 한 번도 맞지 않았다면 상태 해제
-        if (!isHit)
-            OnLaserNotHit();
-
-        // 다음 프레임을 위해 히트 상태 초기화
-        isHit = false;
-    }
-
     /// <summary>
     /// 레이저가 맞지 않았을 때 처리
     /// - 이펙트 비활성화
@@ -114,4 +122,5 @@ public class ReceiverStateEffect : MonoBehaviour
         if (cachedRenderer != null && cachedRenderer.material.HasProperty("_Color"))
             cachedRenderer.material.color = originalColor;
     }
+    #endregion
 }

@@ -2,6 +2,7 @@
 
 /// <summary>
 /// 플레이 타임 중 거울 오브젝트의 이동 및 회전을 제어하는 컨트롤러
+/// Mirror_ujin.prefab에 추가
 /// </summary>
 public class MirrorTransformController : MonoBehaviour
 {
@@ -133,8 +134,13 @@ public class MirrorTransformController : MonoBehaviour
     }
     #endregion
 
+    #region Raycast
     /// <summary>
-    /// 마우스 위치에서 쏜 레이가 현재 거울 높이의 평면과 만나는 지점을 계산
+    /// 마우스의 2D 화면 좌표를
+    /// 거울이 위치한 3D 공간 좌표로 변환하기 위한 계산
+    /// 
+    /// 마우스 드래그 시
+    /// 거울이 위아래로 튀지 않고 X/Z 방향으로만 자연스럽게 이동
     /// </summary>
     private bool TryRaycastToPlane(out Vector3 hitPoint)
     {
@@ -160,5 +166,5 @@ public class MirrorTransformController : MonoBehaviour
 
         return false;
     }
-
+    #endregion
 }

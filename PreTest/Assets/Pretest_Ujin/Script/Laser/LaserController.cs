@@ -39,6 +39,17 @@ public class LaserController : MonoBehaviour
 
     private void Awake()
     {
+        Initialize();
+    }
+
+    #region 레이저 컨트롤러의 필수 참조 초기화
+    /// <summary>
+    /// - 발사 위치(muzzle) 자동 설정
+    /// - LineRenderer 설정
+    /// - 반사 횟수 UI 탐색 및 초기화
+    /// </summary>
+    private void Initialize()
+    {
         // muzzle이 지정되지 않았을 경우, 자식 BoxCollider 기준으로 자동 할당
         if (muzzle == null)
             muzzle = GetComponentInChildren<BoxCollider>().transform;
@@ -58,6 +69,7 @@ public class LaserController : MonoBehaviour
         if (reflectionCounterUI != null)
             reflectionCounterUI.Initialize(maxReflectionCount);
     }
+    #endregion
 
     private void Update()
     {
@@ -65,6 +77,7 @@ public class LaserController : MonoBehaviour
         FireLaser();
     }
 
+    #region 레이저 발사 기능
     /// <summary>
     /// 레이저를 발사하고
     /// Raycast 반사 로직을 통해 경로를 계산한다.
@@ -97,13 +110,7 @@ public class LaserController : MonoBehaviour
         {
             if (remainDistance <= 0.0001f) break;
 
-            if (Physics.Raycast(
-                origin,
-                direction,
-                out RaycastHit hit,
-                remainDistance,
-                ~0,
-                QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(origin, direction, out RaycastHit hit, remainDistance, ~0, QueryTriggerInteraction.Ignore))
             {
                 // 충돌 지점 추가
                 points[pointCount++] = hit.point;
@@ -166,4 +173,5 @@ public class LaserController : MonoBehaviour
         for (int i = 0; i < pointCount; i++)
             lineRenderer.SetPosition(i, points[i]);
     }
+    #endregion
 }

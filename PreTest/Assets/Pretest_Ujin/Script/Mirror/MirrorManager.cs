@@ -20,6 +20,19 @@ public class MirrorManager : MonoBehaviour
 
     void Update()
     {
+        ShortcutKeys();
+    }
+
+    #region 단축키
+    /// <summary>
+    /// 거울 편집용 단축키
+    /// 
+    /// - Z 키: 거울 생성 및 자동 선택
+    /// - 마우스 클릭: 씬에서 거울 선택
+    /// - Delete 키: 선택된 거울 삭제
+    /// </summary>
+    private void ShortcutKeys()
+    {
         // Z 키를 누르면 새로운 거울 생성
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -48,7 +61,9 @@ public class MirrorManager : MonoBehaviour
             currentSelected = null;
         }
     }
+    #endregion
 
+    #region 거울 선택 처리
     /// <summary>
     /// 선택된 거울을 변경하는 함수
     /// - 기존 선택 해제
@@ -69,7 +84,9 @@ public class MirrorManager : MonoBehaviour
         if (currentSelected != null)
             currentSelected.SetSelected(true);
     }
+    #endregion
 
+    #region 거울 선택 판별
     /// <summary>
     /// 마우스로 클릭한 오브젝트가 거울인지 판별
     /// - Raycast로 클릭 대상 검사
@@ -95,4 +112,5 @@ public class MirrorManager : MonoBehaviour
 
         return false;
     }
+    #endregion
 }
