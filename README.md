@@ -136,6 +136,8 @@ ReceiverStateEffect는 레이저 히트 상태에 따라 시각적 피드백을 
 
 ## 추가 구현 기능
 
+---
+
 ## 7. UI
 
 LaserReflectionCounterUI는 레이저의 남은 반사 횟수를 표시합니다.
