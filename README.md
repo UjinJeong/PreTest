@@ -1,35 +1,36 @@
 ## 1. 프로젝트 폴더 구조
 
 본 과제에서 직접 구현한 모든 리소스는  
-Assets/Pretest_Ujin 폴더 하위에 정리했습니다.
+`Assets/Pretest_Ujin` 폴더 하위에 정리했습니다.
 
 외부 에셋 또는 Unity 기본 리소스와 구분하기 위해  
-과제 제출용 구현물은 Pretest_Ujin 폴더만 사용하도록 구성했습니다.
+과제 제출용 구현물은 `Pretest_Ujin` 폴더만 사용하도록 구성했습니다.
 
+```text
 Assets
 └─ Pretest_Ujin
    ├─ EffectAssets
-   │   └─ Effects
-   │       ├─ _Materials
-   │       └─ _Prefabs
+   │  └─ Effects
+   │     ├─ _Materials
+   │     └─ _Prefabs
    ├─ Sound
-   │   ├─ EffectSound
-   │   └─ Music
+   │  ├─ EffectSound
+   │  └─ Music
    ├─ Prefabs
-   │   └─ Mirror_ujin
+   │  └─ Mirror_ujin
    ├─ Scene
-   │   └─ Scene_UJin
+   │  └─ Scene_UJin
    └─ Script
-       ├─ EffectSoundController.cs
-       ├─ Laser
-       │   ├─ LaserController.cs
-       │   └─ LaserReflectionCounterUI.cs
-       ├─ Mirror
-       │   ├─ MirrorManager.cs
-       │   ├─ MirrorSurface.cs
-       │   └─ MirrorTransformController.cs
-       └─ Receiver
-           └─ ReceiverStateEffect.cs
+      ├─ EffectSoundController.cs
+      ├─ Laser
+      │  ├─ LaserController.cs
+      │  └─ LaserReflectionCounterUI.cs
+      ├─ Mirror
+      │  ├─ MirrorManager.cs
+      │  ├─ MirrorSurface.cs
+      │  └─ MirrorTransformController.cs
+      └─ Receiver
+         └─ ReceiverStateEffect.cs
 
 과제 검증 시 Assets/Pretest_Ujin 폴더만 확인하면  
 레이저, 거울, Receiver, UI, 사운드까지 모든 구현을 확인할 수 있습니다.
@@ -130,7 +131,9 @@ ReceiverStateEffect는 레이저 히트 상태에 따라 시각적 피드백을 
 프레임 단위 판정 구조로,  
 레이저가 끊기면 자동으로 원래 상태로 복귀합니다.
 
------------ 추가 구현 기능
+---
+
+## 추가 구현 기능
 
 ## 7. UI
 
