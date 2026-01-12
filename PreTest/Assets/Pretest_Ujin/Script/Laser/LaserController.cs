@@ -5,6 +5,8 @@ using UnityEngine;
 /// Raycast를 이용해 충돌 지점까지 LineRenderer로 시각화하며
 /// MirrorSurface에 닿으면 정반사를 수행하는 컨트롤러
 /// 
+/// Laser 오브젝트에 추가
+/// 
 /// - 최대 반사 횟수 제한
 /// - Receiver 도달 시 상태 변화 트리거
 /// - Mirror / Receiver Enter 순간에만 효과음 재생
