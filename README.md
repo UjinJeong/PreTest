@@ -44,7 +44,7 @@ Mirror_ujin 프리팹을 별도로 복사하여 과제 전용 거울 프리팹�
 Mirror_ujin 프리팹에는 다음 컴포넌트를 추가했습니다.
 
 - MirrorSurface.cs (레이저 반사 대상 마커)  
-- MirrorTransformController.cs (이동 및 회전 제어)  
+- MirrorTransformController.cs (이동 및 회전 제어)
 
 이를 통해 제공 에셋과 과제 구현을 명확히 분리하고,  
 제출용 구조를 깔끔하게 유지했습니다.
@@ -102,6 +102,8 @@ MirrorSurface는 레이저 반사 대상 여부를 구분하는 마커 역할을
 ---
 
 ## 5.1 Mirror 조작 방식
+
+MirrorTransformController.cs 에서 관리 - 이동/회전 속도 조절 가능
 
 거울 생성 : z
 거울 회전 : q/e
