@@ -1,3 +1,8 @@
+## 참고 Scene
+ - Scene_UJin
+ 
+ ---
+ 
 ## 1. 프로젝트 폴더 구조
 
 본 과제에서 직접 구현한 모든 리소스는  
@@ -6,7 +11,6 @@
 외부 에셋 또는 Unity 기본 리소스와 구분하기 위해  
 과제 제출용 구현물은 `Pretest_Ujin` 폴더만 사용하도록 구성했습니다.
 
-```text
 Assets
 └─ Pretest_Ujin
    ├─ EffectAssets
@@ -31,7 +35,7 @@ Assets
       │  └─ MirrorTransformController.cs
       └─ Receiver
          └─ ReceiverStateEffect.cs
-```  
+
 
 과제 검증 시 Assets/Pretest_Ujin 폴더만 확인하면  
 레이저, 거울, Receiver, UI, 사운드까지 모든 구현을 확인할 수 있습니다.
@@ -94,10 +98,6 @@ LaserController는 매 프레임 Raycast 기반으로 레이저를 발사합니�
 
 MirrorManager는 플레이 중 거울의 생성, 선택, 삭제를 담당합니다.
 
-- Z 키로 거울 생성  
-- 마우스 클릭으로 선택  
-- Delete 키로 선택된 거울 삭제  
-
 MirrorTransformController는 선택된 거울만 조작할 수 있도록 제한하며,  
 MirrorSurface는 레이저 반사 대상 여부를 구분하는 마커 역할을 합니다.
 
@@ -107,12 +107,12 @@ MirrorSurface는 레이저 반사 대상 여부를 구분하는 마커 역할을
 
 MirrorTransformController.cs 에서 관리 - 이동/회전 속도 조절 가능
 
-- 거울 생성 : z
-- 거울 회전 : q/e
+- 거울 생성 : Z
+- 거울 회전 : Q/E
 - 거울 이동 : 마우스 드래그
-- 거울 위/아래 이동 : w/s
-- 거울 위/아래 회전 : r/f
-- 거울 삭제 : 삭제 대상 클릭 후 del
+- 거울 위/아래 이동 : W/S
+- 거울 위/아래 회전 : R/F
+- 거울 삭제 : 삭제 대상 클릭 후 Delete
 
 ---
 
