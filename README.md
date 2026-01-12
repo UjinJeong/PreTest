@@ -17,7 +17,6 @@
 과제 제출용 구현물은 `Pretest_Ujin` 폴더만 사용하도록 구성했습니다.
 
 ```markdown
-```text
 Assets
 └─ Pretest_Ujin
    ├─ EffectAssets
@@ -70,7 +69,6 @@ Mirror_ujin 프리팹에는 다음 컴포넌트를 추가했습니다.
 역할과 책임이 명확한 구조로 설계했습니다.
 
 ```markdown
-```text
 Laser  
  └─ LaserController.cs  
 
