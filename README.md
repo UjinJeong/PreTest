@@ -1,3 +1,8 @@
+## 브랜치
+- feature_PreTest_UJin
+
+---
+
 ## 참고 Scene
  - Scene_UJin
  
@@ -11,6 +16,8 @@
 외부 에셋 또는 Unity 기본 리소스와 구분하기 위해  
 과제 제출용 구현물은 `Pretest_Ujin` 폴더만 사용하도록 구성했습니다.
 
+```markdown
+```text
 Assets
 └─ Pretest_Ujin
    ├─ EffectAssets
@@ -35,7 +42,7 @@ Assets
       │  └─ MirrorTransformController.cs
       └─ Receiver
          └─ ReceiverStateEffect.cs
-
+```
 
 과제 검증 시 Assets/Pretest_Ujin 폴더만 확인하면  
 레이저, 거울, Receiver, UI, 사운드까지 모든 구현을 확인할 수 있습니다.
@@ -62,6 +69,8 @@ Mirror_ujin 프리팹에는 다음 컴포넌트를 추가했습니다.
 본 프로젝트는 Laser, Mirror, Receiver를 각각 독립된 컴포넌트로 분리하여  
 역할과 책임이 명확한 구조로 설계했습니다.
 
+```markdown
+```text
 Laser  
  └─ LaserController.cs  
 
@@ -78,6 +87,7 @@ UI
 
 Sound  
  └─ EffectSoundController.cs  
+```
 
 ---
 
