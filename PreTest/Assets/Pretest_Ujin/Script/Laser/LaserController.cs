@@ -153,11 +153,11 @@ public class LaserController : MonoBehaviour
         }
 
         // Mirror Enter 순간에만 효과음 재생
-        if (hitMirrorThisFrame != null && hitMirrorThisFrame != prevMirror)
+        if (hitMirrorThisFrame != null && hitMirrorThisFrame != prevMirror && EffectSoundController.Instance != null)
             EffectSoundController.Instance.Play(0);
 
         // Receiver Enter 순간에만 효과음 재생
-        if (hitReceiverThisFrame != null && hitReceiverThisFrame != prevReceiver)
+        if (hitReceiverThisFrame != null && hitReceiverThisFrame != prevReceiver && EffectSoundController.Instance != null)
             EffectSoundController.Instance.Play(1);
 
         // 이전 프레임 기록 갱신
