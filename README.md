@@ -31,6 +31,7 @@ Assets
       │  └─ MirrorTransformController.cs
       └─ Receiver
          └─ ReceiverStateEffect.cs
+```  
 
 과제 검증 시 Assets/Pretest_Ujin 폴더만 확인하면  
 레이저, 거울, Receiver, UI, 사운드까지 모든 구현을 확인할 수 있습니다.
